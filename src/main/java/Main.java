@@ -3,6 +3,7 @@ package main.java;
 //TODO Rename spreadsheetClasses folder
 
 import main.java.services.FunderService;
+import main.java.services.MortgageService;
 import main.java.services.ProductService;
 
 
@@ -10,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         var products = ProductService.getProductsFromCsv("products");
         var funders = FunderService.getFundersWithDesiredProductsFromCsv("funded_products_by_funder");
-//        var mortgages = MortgageService.getMortgagesFromCsv("mortgages");
+        var mortgages = MortgageService.getMortgagesFromCsv("mortgages");
 
         System.out.println("done");
 

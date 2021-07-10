@@ -2,15 +2,15 @@ package main.java.spreadsheetClasses;
 
 public class Mortgage {
 
-    int mortageId;
+    int mortgageId;
     int loanAmount;
-    Product productForMortgage;
+    String product;
     String postcode;
 
-    public Mortgage(int mortageId, int loanAmount, Product productForMortgage, String postcode) {
-        this.mortageId = mortageId;
+    public Mortgage(int mortgageId, int loanAmount, String productForMortgage, String postcode) {
+        this.mortgageId = mortgageId;
         this.loanAmount = loanAmount;
-        this.productForMortgage = productForMortgage;
+        this.product = productForMortgage;
         this.postcode = postcode;
     }
 }
