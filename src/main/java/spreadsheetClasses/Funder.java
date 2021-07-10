@@ -1,14 +1,14 @@
 package main.java.spreadsheetClasses;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Funder {
 
     String funderCodeName;
-    ArrayList<Product> productsToBeFunded;
+    List<Product> desiredProducts;
 
-    public Funder(String funderCodeName, ArrayList<Product> productsToBeFunded) {
+    public Funder(String funderCodeName, List<Product> desiredProducts) {
         this.funderCodeName = funderCodeName;
-        this.productsToBeFunded = productsToBeFunded;
+        this.desiredProducts = desiredProducts;
     }
 }

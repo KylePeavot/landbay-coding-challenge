@@ -2,20 +2,17 @@ package main.java;
 
 //TODO Rename spreadsheetClasses folder
 
+import main.java.services.FunderService;
 import main.java.services.ProductService;
-import main.java.spreadsheetClasses.Funder;
-import main.java.spreadsheetClasses.Mortgage;
-import main.java.spreadsheetClasses.Product;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        List<Product> products = ProductService.getProductsFromCsv("products");
-        List<Funder> funders = new ArrayList<>();
-        List<Mortgage> mortgages = new ArrayList<>();
+        var products = ProductService.getProductsFromCsv("products");
+        var funders = FunderService.getFundersWithDesiredProductsFromCsv("funded_products_by_funder");
+//        var mortgages = MortgageService.getMortgagesFromCsv("mortgages");
 
+        System.out.println("done");
 
         /**
          * Load spreadsheet data into POJOs
@@ -24,6 +21,7 @@ public class Main {
          *      - If two funders could receive the same mortgage
          *          - Give it to funder with lowest total loaned amount
          *          - If equal, Random.next()
+         *
          * Load results into POJO(s) and output
          */
 

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  */
 public class CsvHelper {
 
-    public static List<String> getAllLinesFromCsv(String filename) {
+    public static List<String> getAllLinesFromCsvWithHeaders(String filename) {
         try {
             return new BufferedReader(new FileReader("src/main/resources/" + filename + ".csv"))
                 .lines()
@@ -20,6 +20,12 @@ public class CsvHelper {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static List<String> getAllLinesFromCsvWithoutHeaders(String filename) {
+        var allLines = getAllLinesFromCsvWithHeaders(filename);
+        allLines.remove(0);
+        return allLines;
     }
 
 }
