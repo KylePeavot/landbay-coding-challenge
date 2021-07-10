@@ -20,4 +20,10 @@ public class MortgageService {
                 );
             }).collect(Collectors.toList());
     }
+
+    public static List<Mortgage> sortMortgagesByLoanAmount(List<Mortgage> mortgages) {
+        mortgages.sort((o1, o2) -> o1.getLoanAmount() < o2.getLoanAmount() ? 1 : -1);
+
+        return mortgages;
+    }
 }

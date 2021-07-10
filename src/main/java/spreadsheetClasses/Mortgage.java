@@ -13,4 +13,20 @@ public class Mortgage {
         this.product = productForMortgage;
         this.postcode = postcode;
     }
+
+    public int getMortgageId() {
+        return mortgageId;
+    }
+
+    public int getLoanAmount() {
+        return loanAmount;
+    }
+
+    public String getProduct() {
+        return product;
+    }
+
+    public String getPostcode() {
+        return postcode;
+    }
 }

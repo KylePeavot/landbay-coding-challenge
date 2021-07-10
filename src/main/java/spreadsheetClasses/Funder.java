@@ -11,4 +11,12 @@ public class Funder {
         this.funderCodeName = funderCodeName;
         this.desiredProducts = desiredProducts;
     }
+
+    public String getFunderCodeName() {
+        return funderCodeName;
+    }
+
+    public List<Product> getDesiredProducts() {
+        return desiredProducts;
+    }
 }

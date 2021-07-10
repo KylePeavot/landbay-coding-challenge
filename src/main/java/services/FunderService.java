@@ -1,5 +1,6 @@
 package main.java.services;
 
+import main.java.spreadsheetClasses.Funder;
 import main.java.utils.CsvHelper;
 
 import java.util.ArrayList;
@@ -29,8 +30,14 @@ public class FunderService {
             }
         }
 
-
         return fundersWithDesiredProducts;
+    }
+
+    /**
+     * find a common product between to funders to see if any are swappable
+     */
+    public static String[] findCommonProducts(Funder funderA, Funder funderB) {
+        return new String[]{};
     }
 
 }
