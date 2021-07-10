@@ -1,6 +1,6 @@
 package main.java.services;
 
-import main.java.spreadsheetClasses.Mortgage;
+import main.java.entities.Mortgage;
 import main.java.utils.CsvHelper;
 
 import java.util.List;

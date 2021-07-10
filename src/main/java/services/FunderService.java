@@ -1,6 +1,6 @@
 package main.java.services;
 
-import main.java.spreadsheetClasses.Funder;
+import main.java.entities.Funder;
 import main.java.utils.CsvHelper;
 
 import java.util.ArrayList;

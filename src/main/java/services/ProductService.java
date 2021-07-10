@@ -1,6 +1,6 @@
 package main.java.services;
 
-import main.java.spreadsheetClasses.Product;
+import main.java.entities.Product;
 import main.java.utils.CsvHelper;
 
 import java.util.List;

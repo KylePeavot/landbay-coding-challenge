@@ -5,11 +5,12 @@ package main.java;
 import main.java.services.FunderService;
 import main.java.services.MortgageService;
 import main.java.services.ProductService;
-import main.java.spreadsheetClasses.Mortgage;
+import main.java.entities.Mortgage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,9 +18,16 @@ public class Main {
         var funders = FunderService.getFundersWithDesiredProductsFromCsv("funded_products_by_funder");
         var mortgages = MortgageService.sortMortgagesByLoanAmount(MortgageService.getMortgagesFromCsv("mortgages"));
 
-        HashMap<String, ArrayList<Mortgage>> funderToMortgages = new HashMap<>(); //funder to product mapping
+        List<String> boughtProducts = new ArrayList<>();
+        Map<String, ArrayList<Mortgage>> funderToMortgages = new HashMap<>(); //funder to product mapping
 
-        //for each, check if the product has already been "bought"
+        for (var mortgage : mortgages) {
+            if (!boughtProducts.contains(mortgage.getProduct())) {
+
+            }
+        }
+
+
         //If not yet "bought", find funders willing to buy product
         //Give mortgage and product to the funder
         //If decision to be made between multiple funders, either random (temporarily just choose first), or choose funder with least total so far
@@ -41,7 +49,5 @@ public class Main {
          *
          * Load results into POJO(s) and output
          */
-
-
     }
 }

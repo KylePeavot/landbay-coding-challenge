@@ -1,4 +1,4 @@
-package main.java.spreadsheetClasses;
+package main.java.entities;
 
 import java.util.List;
 
