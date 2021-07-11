@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * For various CSV helper methods
+ * For CSV helper methods
  */
 public class CsvHelper {
 

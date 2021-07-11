@@ -4,7 +4,7 @@ public class Mortgage {
 
     int mortgageId;
     int loanAmount;
-    String product;
+    String product; //TODO rename to productId?
     String postcode;
 
     public Mortgage(int mortgageId, int loanAmount, String productForMortgage, String postcode) {

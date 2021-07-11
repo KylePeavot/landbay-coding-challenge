@@ -2,34 +2,54 @@ package main.java;
 
 //TODO Rename spreadsheetClasses folder
 
+import main.java.entities.Funder;
+import main.java.entities.Mortgage;
 import main.java.services.FunderService;
 import main.java.services.MortgageService;
 import main.java.services.ProductService;
-import main.java.entities.Mortgage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
         var products = ProductService.getProductsFromCsv("products");
-        var funders = FunderService.getFundersWithDesiredProductsFromCsv("funded_products_by_funder");
+        var funders = FunderService.getFundersFromCsv("funded_products_by_funder");
         var mortgages = MortgageService.sortMortgagesByLoanAmount(MortgageService.getMortgagesFromCsv("mortgages"));
 
         List<String> boughtProducts = new ArrayList<>();
-        Map<String, ArrayList<Mortgage>> funderToMortgages = new HashMap<>(); //funder to product mapping
 
+        //for each mortgage
         for (var mortgage : mortgages) {
-            if (!boughtProducts.contains(mortgage.getProduct())) {
+            String productId = mortgage.getProduct();
 
+            //if the product for a mortgage hasn't been allocated yet
+            if (!boughtProducts.contains(productId)) {
+                List<Funder> fundersForCurrentMortgage = funders.stream()
+                    .filter(funder -> funder.getDesiredProducts().contains(productId))
+                    .collect(Collectors.toList());
+
+
+                //if there exists a funder willing to fund the current mortgage
+                if (fundersForCurrentMortgage.size() > 0) {
+                    //Give the mortgage to the funder with the least money deployed
+                    Funder leastDeployedMoney = fundersForCurrentMortgage.stream()
+                        .min((o1, o2) -> {
+                            if (o1.totalMoneyDeployed() < o2.totalMoneyDeployed()) return -1;
+                            else if (o1.totalMoneyDeployed() < o2.totalMoneyDeployed()) return 1;
+                            else return 0;
+                        })
+                        .get();
+
+                    leastDeployedMoney.addToFundedMortgages(mortgage);
+
+                    boughtProducts.add(mortgage.getProduct());
+                }
             }
         }
 
-
-        //If not yet "bought", find funders willing to buy product
-        //Give mortgage and product to the funder
         //If decision to be made between multiple funders, either random (temporarily just choose first), or choose funder with least total so far
 
 

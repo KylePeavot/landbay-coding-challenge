@@ -4,33 +4,32 @@ import main.java.entities.Funder;
 import main.java.utils.CsvHelper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * For logic concerning Funder(s)
  */
 public class FunderService {
 
-    public static HashMap<String, ArrayList<String>> getFundersWithDesiredProductsFromCsv(String filename) {
-        var fundersWithDesiredProducts = new HashMap<String, ArrayList<String>>();
+    public static Set<Funder> getFundersFromCsv(String filename) {
+        var funders = new HashSet<Funder>();
 
         for (String csvRow : CsvHelper.getAllLinesFromCsvWithoutHeaders(filename)) {
             String[] funderData = csvRow.split(",");
             String funderName = funderData[0];
             String productId = funderData[1];
 
-            if (!fundersWithDesiredProducts.containsKey(funderName)) {
-                fundersWithDesiredProducts.put(funderName, new ArrayList<>(List.of(productId)));
-            } else {
-                var updatedProducts = fundersWithDesiredProducts.get(funderName);
-                updatedProducts.add(productId);
+            var funderTemp = funders.stream()
+                .filter(funder -> funder.getCodeName().equals(funderName))
+                .findFirst()
+                .orElse(new Funder(funderName, new ArrayList<>()));
 
-                fundersWithDesiredProducts.put(funderName, updatedProducts);
-            }
+            funderTemp.addToDesiredProducts(productId);
+
+            funders.add(funderTemp);
         }
-
-        return fundersWithDesiredProducts;
+        return funders;
     }
 
     /**

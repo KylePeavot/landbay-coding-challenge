@@ -6,6 +6,9 @@ import main.java.utils.CsvHelper;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * For logic concerning Mortgage
+ */
 public class MortgageService {
 
     public static List<Mortgage> getMortgagesFromCsv(String filename) {
