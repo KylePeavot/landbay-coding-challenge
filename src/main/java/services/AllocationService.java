@@ -38,7 +38,7 @@ public class AllocationService {
             }
         }
 
-        allocations = distributeMortgagesFairly(allocations, 0.8, 20);
+        allocations = distributeMortgagesFairly(allocations, 0.6, 20);
 
         return allocations;
     }
@@ -52,7 +52,7 @@ public class AllocationService {
         int cyclesCompleted = 0;
         double fairness = fairness(allocations);
 
-        while (fairness > acceptableFairness && cyclesCompleted < maxCycles) {
+        while (fairness < acceptableFairness && cyclesCompleted < maxCycles) {
             boolean mortgageTransferred = false;
 
             for (int leastDeployedIndex = 0; leastDeployedIndex < allocations.size() && !mortgageTransferred; leastDeployedIndex++) {
@@ -84,7 +84,7 @@ public class AllocationService {
      * @param allocations the list of allocations
      * @return the fairness of the loan distribution
      */
-    public double fairness(List<Allocation> allocations) {
+    private double fairness(List<Allocation> allocations) {
         List<Allocation> allocationsCopy = new ArrayList<>(allocations);
         allocationsCopy.sort(Allocation::compareTo);
         double fairness = 0.0;
