@@ -11,9 +11,9 @@ import java.util.stream.Collectors;
  */
 public class CsvHelper {
 
-    public static List<String> getAllLinesFromCsvWithHeaders(String filename) {
+    public static List<String> getAllLinesFromCsvWithHeaders(String filePath) {
         try {
-            return new BufferedReader(new FileReader("src/main/resources/" + filename + ".csv"))
+            return new BufferedReader(new FileReader(filePath))
                 .lines()
                 .collect(Collectors.toList());
         } catch (FileNotFoundException e) {

@@ -16,13 +16,14 @@ public class AllocationServiceTest {
     private AllocationService allocationService;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         allocationService = new AllocationService();
     }
 
     @Test
     public void testSimpleDistribution() {
         //ensure that 4 sets of 100 moneys are distributed evenly across 2 funders
+
     }
 
     @Test

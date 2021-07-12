@@ -21,15 +21,13 @@ public class Main {
     }
 
     public void run() {
-        var products = productService.getFromCsv("products");
-        var funders = funderService.getFromCsv("funded_products_by_funder");
-        var mortgages = mortgageService.getFromCsv("mortgages");
+        var products = productService.getFromCsv("src/main/resources/products.csv");
+        var funders = funderService.getFromCsv("src/main/resources/funded_products_by_funder.csv");
+        var mortgages = mortgageService.getFromCsv("src/main/resources/mortgages.csv");
 
         var allocations = allocationService.distributeMortgagesAcrossFunders(mortgages, funders);
 
         allocations.forEach(System.out::println);
-
-        System.out.println(allocationService.fairness(allocations));
     }
 
     public static void main(String[] args) {
