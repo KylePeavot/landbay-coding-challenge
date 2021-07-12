@@ -1,7 +1,7 @@
 # Landbay coding challenge
 
 ## How to run the program
-- Pull this repo into your favourite IDE
+- Pull this repo
 - Run the main method
 - Expected output: Each funder and the mortgage(s) they have been allocated
 
