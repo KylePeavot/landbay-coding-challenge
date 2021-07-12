@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * A POJO used to represent the solution to this problem
+ */
+
 public class Allocation implements Comparable<Allocation> {
 
     private final Funder funder;

@@ -1,6 +1,5 @@
 package main.java;
 
-import main.java.entities.Mortgage;
 import main.java.services.AllocationService;
 import main.java.services.FunderService;
 import main.java.services.MortgageService;
@@ -33,8 +32,5 @@ public class Main {
     public static void main(String[] args) {
         var main = new Main();
         main.run();
-
-        //TODO add comments
-        //TODO add tests
     }
 }
