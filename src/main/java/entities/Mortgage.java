@@ -1,16 +1,16 @@
 package main.java.entities;
 
-public class Mortgage {
+public class Mortgage implements Comparable<Mortgage> {
 
-    int mortgageId;
-    int loanAmount;
-    String product; //TODO rename to productId?
-    String postcode;
+    private final int mortgageId;
+    private final int loanAmount;
+    private final String productId;
+    private final String postcode;
 
     public Mortgage(int mortgageId, int loanAmount, String productForMortgage, String postcode) {
         this.mortgageId = mortgageId;
         this.loanAmount = loanAmount;
-        this.product = productForMortgage;
+        this.productId = productForMortgage;
         this.postcode = postcode;
     }
 
@@ -22,8 +22,8 @@ public class Mortgage {
         return loanAmount;
     }
 
-    public String getProduct() {
-        return product;
+    public String getProductId() {
+        return productId;
     }
 
     public String getPostcode() {
@@ -32,6 +32,11 @@ public class Mortgage {
 
     @Override
     public String toString() {
-        return "id: " + mortgageId + ", loan amount: " + loanAmount + ", product: " + product + ", postcode: " + postcode;
+        return "id: " + mortgageId + ", loan amount: " + loanAmount + ", product: " + productId + ", postcode: " + postcode;
+    }
+
+    @Override
+    public int compareTo(Mortgage o) {
+        return Integer.compare(this.loanAmount, o.loanAmount);
     }
 }

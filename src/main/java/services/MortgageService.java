@@ -1,6 +1,7 @@
 package main.java.services;
 
 import main.java.entities.Mortgage;
+import main.java.interfaces.CsvService;
 import main.java.utils.CsvHelper;
 
 import java.util.List;
@@ -9,9 +10,10 @@ import java.util.stream.Collectors;
 /**
  * For logic concerning Mortgage
  */
-public class MortgageService {
+public class MortgageService implements CsvService<Mortgage> {
 
-    public static List<Mortgage> getMortgagesFromCsv(String filename) {
+    @Override
+    public List<Mortgage> getFromCsv(String filename) {
         return CsvHelper.getAllLinesFromCsvWithoutHeaders(filename).stream()
             .map(lines -> {
                 String[] mortgageData = lines.split(",");
@@ -22,11 +24,5 @@ public class MortgageService {
                     mortgageData[3]
                 );
             }).collect(Collectors.toList());
-    }
-
-    public static List<Mortgage> sortMortgagesByLoanAmount(List<Mortgage> mortgages) {
-        mortgages.sort((o1, o2) -> o1.getLoanAmount() < o2.getLoanAmount() ? 1 : -1);
-
-        return mortgages;
     }
 }

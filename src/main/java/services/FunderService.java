@@ -1,18 +1,21 @@
 package main.java.services;
 
 import main.java.entities.Funder;
+import main.java.interfaces.CsvService;
 import main.java.utils.CsvHelper;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  * For logic concerning Funder(s)
  */
-public class FunderService {
+public class FunderService implements CsvService<Funder> {
 
-    public static Set<Funder> getFundersFromCsv(String filename) {
+    @Override
+    public List<Funder> getFromCsv(String filename) {
         var funders = new HashSet<Funder>();
 
         for (String csvRow : CsvHelper.getAllLinesFromCsvWithoutHeaders(filename)) {
@@ -29,14 +32,6 @@ public class FunderService {
 
             funders.add(funderTemp);
         }
-        return funders;
+        return new ArrayList<>(funders);
     }
-
-    /**
-     * find a common product between to funders to see if any are swappable
-     */
-    public static String[] findCommonProducts(Funder funderA, Funder funderB) {
-        return new String[]{};
-    }
-
 }

@@ -21,6 +21,17 @@ public class AllocationServiceTest {
     }
 
     @Test
+    public void testSimpleDistribution() {
+        //ensure that 4 sets of 100 moneys are distributed evenly across 2 funders
+    }
+
+    @Test
+    public void testComplexDistribution() {
+        //test similar functionality to use case for challenge
+    }
+
+
+    @Test
     public void testFairnessReturnsOneIfAllFundersDeploySameMoney() {
         var allocationA = new Allocation(new Funder("testFunderA", Collections.emptyList()));
         var allocationB = new Allocation(new Funder("testFunderB", Collections.emptyList()));
