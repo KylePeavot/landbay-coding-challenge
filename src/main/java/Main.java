@@ -2,14 +2,14 @@ package main.java;
 
 //TODO Rename spreadsheetClasses folder
 
-import main.java.entities.Funder;
+import main.java.entities.Allocation;
 import main.java.entities.Mortgage;
+import main.java.services.AllocationService;
 import main.java.services.FunderService;
 import main.java.services.MortgageService;
 import main.java.services.ProductService;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,22 +20,21 @@ public class Main {
         var mortgages = MortgageService.sortMortgagesByLoanAmount(MortgageService.getMortgagesFromCsv("mortgages"));
 
         List<String> boughtProducts = new ArrayList<>();
+        List<Allocation> allocations = funders.stream().map(Allocation::new).collect(Collectors.toList());
 
         //for each mortgage
         for (var mortgage : mortgages) {
-            String productId = mortgage.getProduct();
-
             //if the product for a mortgage hasn't been allocated yet
-            if (!boughtProducts.contains(productId)) {
-                List<Funder> fundersForCurrentMortgage = funders.stream()
-                    .filter(funder -> funder.getDesiredProducts().contains(productId))
+            if (!boughtProducts.contains(mortgage.getProduct())) {
+                //find the funders willing to buy it
+                List<Allocation> potentialAllocationsForMortgage = allocations.stream()
+                    .filter(allocation -> allocation.getFunder().getDesiredProducts().contains(mortgage.getProduct()))
                     .collect(Collectors.toList());
 
-
-                //if there exists a funder willing to fund the current mortgage
-                if (fundersForCurrentMortgage.size() > 0) {
+                //if there exists a funder willing to buy the product on the current mortgage
+                if (potentialAllocationsForMortgage.size() > 0) {
                     //Give the mortgage to the funder with the least money deployed
-                    Funder leastDeployedMoney = fundersForCurrentMortgage.stream()
+                    Allocation leastDeployedMoney = potentialAllocationsForMortgage.stream()
                         .min((o1, o2) -> {
                             if (o1.totalMoneyDeployed() < o2.totalMoneyDeployed()) return -1;
                             else if (o1.totalMoneyDeployed() < o2.totalMoneyDeployed()) return 1;
@@ -50,24 +49,16 @@ public class Main {
             }
         }
 
-        //If decision to be made between multiple funders, either random (temporarily just choose first), or choose funder with least total so far
+        allocations = AllocationService.distributeMortgagesFairly(allocations, 0.8, 20);
 
+        //TODO SOLID-ify the project
+        //TODO add comments
+        //TODO add tests
+        //TODO finish up all TODOs
+        //TODO final pass
 
-        //This is fair because all funders are being distributed the best mortgages together.
-        //Could do a final distribution checker after where I see if the funder with the most total lent can give to the least total (do they have any swappable products)
-
-
-        System.out.println("done");
-
-        /**
-         * Load spreadsheet data into POJOs (done)
-         * Find fair distribution for mortgages to funders
-         *   - Order mortgages by loan amount and distribute among funders going down the list
-         *      - If two funders could receive the same mortgage
-         *          - Give it to funder with lowest total loaned amount
-         *          - If equal, Random.next()
-         *
-         * Load results into POJO(s) and output
-         */
+        for (Allocation allocation : allocations) {
+            System.out.println(allocation.toString());
+        }
     }
 }

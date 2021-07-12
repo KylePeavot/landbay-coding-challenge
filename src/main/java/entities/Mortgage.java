@@ -29,4 +29,9 @@ public class Mortgage {
     public String getPostcode() {
         return postcode;
     }
+
+    @Override
+    public String toString() {
+        return "id: " + mortgageId + ", loan amount: " + loanAmount + ", product: " + product + ", postcode: " + postcode;
+    }
 }
